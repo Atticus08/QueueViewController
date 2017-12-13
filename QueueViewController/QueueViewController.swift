@@ -9,15 +9,14 @@
 import UIKit
 
 public protocol QueueViewControllerDelegate: class {
-    func popItem(item: UIImageView)
+    func popItem(view: UIView)
 }
-open class QueueViewController<T>: UIViewController {
+open class QueueViewController<T: UIView>: UIViewController {
     public enum QueueDirection { case vertical, horizontal }
     public var layoutDirection: QueueDirection = .vertical
     public weak var delegate: QueueViewControllerDelegate?
-    
-    internal struct QueueImageViewItem {
-        var imageView: UIImageView = UIImageView()
+    internal struct QueueItem {
+        var view: T = T()
         var size: CGSize = .zero
         var topConstraint: NSLayoutConstraint?
         var leftConstraint: NSLayoutConstraint?
@@ -26,11 +25,18 @@ open class QueueViewController<T>: UIViewController {
         var heightConstraint: NSLayoutConstraint?
         var widthConstraint: NSLayoutConstraint?
     }
-    internal var imageViewQueue = Queue<QueueImageViewItem>()
+    internal var viewQueue = Queue<QueueItem>()
+    
+    // Allows user to select which property of the queue item to modify
+    // THIS IS TEMPORARY
+    public enum ViewProperty {
+        case image, bgColor, text
+    }
+    
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        self.queueView(setUpWithImageViews: self.queueSources())
+        self.queueView(setUpWithViews: self.queueSources())
     }
     
     /**
@@ -69,7 +75,7 @@ open class QueueViewController<T>: UIViewController {
      Override the method to set the image views to be placed in the view controller.
      - Returns: The image views to be placed inside the queue controller's view
      */
-    open func queueSources() -> [UIImageView] {
+    open func queueSources() -> [T] {
         return []
     }
 }
@@ -81,11 +87,11 @@ extension QueueViewController {
      Set up image view queue within view controller.
      - Parameter imageViews: The image views to be loaded within queue view controller
      */
-    private func queueView(setUpWithImageViews imageViews: [UIImageView]) {
+    private func queueView(setUpWithViews views: [T]) {
         let numberOfItemsToShow = self.numberOfItemsToShow()
         for index in 0..<numberOfItemsToShow {
-            let queueView = self.setupItem(atIndex: index, imageView: imageViews[index])
-            self.imageViewQueue.enqueue(queueView)
+            let queueView = self.setupItem(atIndex: index, view: views[index])
+            self.viewQueue.enqueue(queueView)
         }
     }
     
@@ -97,23 +103,23 @@ extension QueueViewController {
         - imageView: The image view to be displayed on the view
      - Returns: Item to store in controllers queue
      */
-    private func setupItem(atIndex index: Int, imageView: UIImageView) -> QueueImageViewItem {
-        var queueItem = QueueImageViewItem()
-        self.view.addSubview(imageView)
+    private func setupItem(atIndex index: Int, view: T) -> QueueItem {
+        var queueItem = QueueItem()
+        self.view.addSubview(view)
         
-        queueItem.imageView = imageView
+        queueItem.view = view
         queueItem.size = self.queueView(sizeForItemAt: index)
         let minimumEdgeSpacing = self.queueView(minimumEdgeSpacingForItems: 0.0)
         let minimumLineSpacing = self.queueView(minimumLineSpacingForItems: 0.0)
 
         // Calculates the offset from the views topAnchor that each image will be placed at.
         // We need to do this to animate the objects that have layout constraints.
-        imageView.translatesAutoresizingMaskIntoConstraints = false
+        view.translatesAutoresizingMaskIntoConstraints = false
         let topConstraintOffset = minimumLineSpacing + (minimumLineSpacing + queueItem.size.height) * CGFloat(index)
-        queueItem.topConstraint = imageView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: topConstraintOffset)
-        queueItem.leftConstraint = imageView.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: minimumEdgeSpacing)
-        queueItem.rightConstraint = imageView.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -minimumEdgeSpacing)
-        queueItem.heightConstraint = imageView.heightAnchor.constraint(equalToConstant: queueItem.size.height)
+        queueItem.topConstraint = view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: topConstraintOffset)
+        queueItem.leftConstraint = view.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: minimumEdgeSpacing)
+        queueItem.rightConstraint = view.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -minimumEdgeSpacing)
+        queueItem.heightConstraint = view.heightAnchor.constraint(equalToConstant: queueItem.size.height)
 
         queueItem.topConstraint?.isActive = true
         queueItem.leftConstraint?.isActive = true

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 class ViewController: QueueViewController<UIImageView>, QueueViewControllerDelegate {
     let firstImageView: UIImageView = {
         let imageView = UIImageView()
@@ -145,14 +146,14 @@ class ViewController: QueueViewController<UIImageView>, QueueViewControllerDeleg
     @objc func removeImageFromStack() {
         print("Removing Image From Stack!")
         if self.indexTracking < self.queueControllerSource.count {
-            self.popTransition(newImageView: self.queueControllerSource[indexTracking])
+            self.popTransition(newView: self.queueControllerSource[indexTracking], propertyToChange: .bgColor)
             self.indexTracking += 1
         } else {
-            self.popTransition(newImageView: nil)
+            self.popTransition(newView: nil, propertyToChange: nil)
         }
     }
     
-    func popItem(item: UIImageView) {
+    func popItem(view: UIView) {
         print("I'm in the delegate and i can see I popped")
     }
 
