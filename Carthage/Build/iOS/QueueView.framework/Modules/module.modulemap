@@ -1,0 +1,11 @@
+framework module QueueView {
+  umbrella header "QueueView.h"
+
+  export *
+  module * { export * }
+}
+
+module QueueView.Swift {
+    header "QueueView-Swift.h"
+    requires objc
+}
