@@ -12,9 +12,19 @@ public protocol QueueViewControllerDelegate: class {
     func popItem(view: UIView)
 }
 open class QueueViewController<T: UIView>: UIViewController {
+    // MARK: Open/Public Class Properties
+    
+    open var datasourceItem: Any?
     public enum QueueDirection { case vertical, horizontal }
+    // Allows user to select which property of the queue item to modify
+    // THIS IS TEMPORARY
+    public enum ViewProperty {
+        case image, bgColor, text
+    }
     public var layoutDirection: QueueDirection = .vertical
     public weak var delegate: QueueViewControllerDelegate?
+    
+    // MARK: Internal Class Properties
     internal struct QueueItem {
         var view: T = T()
         var size: CGSize = .zero
@@ -27,12 +37,7 @@ open class QueueViewController<T: UIView>: UIViewController {
     }
     internal var viewQueue = Queue<QueueItem>()
     
-    // Allows user to select which property of the queue item to modify
-    // THIS IS TEMPORARY
-    public enum ViewProperty {
-        case image, bgColor, text
-    }
-    
+    // MARK: Open/Public Class Methods
     
     open override func viewDidLoad() {
         super.viewDidLoad()

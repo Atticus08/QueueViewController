@@ -12,7 +12,7 @@ import UIKit
 
 extension QueueViewController {
     /// Pop the first image view off of the queue view controller
-    internal func popTransition(newView: T?, propertyToChange: ViewProperty?) {
+    public func popTransition(newView: T?, propertyToChange: ViewProperty?) {
         guard let poppedView = self.viewQueue.dequeue() else { return }
         print("The size of my queue after pop: ", self.viewQueue.size)
         self.delegate?.popItem(view: poppedView.view)
