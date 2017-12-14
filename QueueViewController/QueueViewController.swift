@@ -47,9 +47,11 @@ open class QueueViewController<T: UIView>: UIViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.queueView(setUpWithViews: self.queueSources())
+        print("In queue view controller VIEW DID LOAD, my view height is: \(self.view.frame.height)")
     }
     
     open override func viewDidAppear(_ animated: Bool) {
+        print("In queue view controller VIEW DID APPEAR, my view height is: \(self.view.frame.height)")
         let numberOfItemsToShow = self.numberOfItemsToShow()
         for index in 0..<numberOfItemsToShow {
             let newItem = self.viewQueue.getNode(index: index)
@@ -111,7 +113,6 @@ extension QueueViewController {
         for index in 0..<numberOfItemsToShow {
             let queueView = self.setupItem(atIndex: index, view: views[index])
             self.viewQueue.enqueue(queueView)
-            print("Index \(index) is created and has a top constant of: \((queueView.topConstraint?.constant)!)")
         }
     }
     
@@ -155,7 +156,6 @@ extension QueueViewController {
         let timeConstant: TimeInterval = 1.0
         newItem.topConstraint?.constant -= self.view.frame.height
         UIView.animate(withDuration: (timeConstant * TimeInterval(index)) + timeConstant, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.0, options: .curveEaseOut, animations: {
-            print("Index \(index) new top constant: \(newItem.topConstraint?.constant)")
             self.view.layoutIfNeeded()
         })
     }

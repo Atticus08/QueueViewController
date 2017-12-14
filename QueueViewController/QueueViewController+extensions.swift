@@ -18,6 +18,7 @@ extension QueueViewController {
         - propertyToChange: The property to be modified on the queue's UIView object.
      */
     public func dequeueTransition(newView: T?, propertyToChange: ViewProperty?) {
+        print("In queue view controller DEQUEUE TRANSITION, my view height is: \(self.view.frame.height)")
         guard let poppedView = self.viewQueue.dequeue() else { return }
         print("The size of my queue after pop: ", self.viewQueue.size)
         self.delegate?.popItem(view: poppedView.view)
