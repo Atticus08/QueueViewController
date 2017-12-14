@@ -9,19 +9,24 @@
 import UIKit
 
 public protocol QueueViewControllerDelegate: class {
+    func queueLoaded()
     func popItem(view: UIView)
 }
 open class QueueViewController<T: UIView>: UIViewController {
     // MARK: Open/Public Class Properties
     
     open var datasourceItem: Any?
+    
+    // TODO: NEED TO STILL BUILD IN DIRECTION OF QUEUE
     public enum QueueDirection { case vertical, horizontal }
+    public var layoutDirection: QueueDirection = .vertical
+    
     // Allows user to select which property of the queue item to modify
     // THIS IS TEMPORARY
     public enum ViewProperty {
         case image, bgColor, text
     }
-    public var layoutDirection: QueueDirection = .vertical
+    
     public weak var delegate: QueueViewControllerDelegate?
     
     // MARK: Internal Class Properties
@@ -42,6 +47,15 @@ open class QueueViewController<T: UIView>: UIViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         self.queueView(setUpWithViews: self.queueSources())
+    }
+    
+    open override func viewDidAppear(_ animated: Bool) {
+        let numberOfItemsToShow = self.numberOfItemsToShow()
+        for index in 0..<numberOfItemsToShow {
+            let newItem = self.viewQueue.getNode(index: index)
+            self.enqueueTransition(newItem: newItem!, index: index)
+        }
+        self.delegate?.queueLoaded()
     }
     
     /**
@@ -121,16 +135,26 @@ extension QueueViewController {
         // We need to do this to animate the objects that have layout constraints.
         view.translatesAutoresizingMaskIntoConstraints = false
         let topConstraintOffset = minimumLineSpacing + (minimumLineSpacing + queueItem.size.height) * CGFloat(index)
-        queueItem.topConstraint = view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: topConstraintOffset)
+        
+        // Place views below the queue, off the screen. When the screen first appears, we animate the views being added to the queue.
+        queueItem.topConstraint = view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: self.view.frame.height + topConstraintOffset)
         queueItem.leftConstraint = view.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: minimumEdgeSpacing)
         queueItem.rightConstraint = view.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -minimumEdgeSpacing)
         queueItem.heightConstraint = view.heightAnchor.constraint(equalToConstant: queueItem.size.height)
-
         queueItem.topConstraint?.isActive = true
         queueItem.leftConstraint?.isActive = true
         queueItem.rightConstraint?.isActive = true
         queueItem.heightConstraint?.isActive = true
         queueItem.widthConstraint?.isActive = true
+        
         return queueItem
+    }
+    
+    private func enqueueTransition(newItem: QueueItem, index: Int) {
+        let timeConstant: TimeInterval = 0.9
+        UIView.animate(withDuration: (timeConstant * TimeInterval(index)) + timeConstant, delay: 0.5, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.8, options: .curveEaseOut, animations: {
+            newItem.topConstraint?.constant -= self.view.frame.height
+            self.view.layoutIfNeeded()
+        })
     }
 }

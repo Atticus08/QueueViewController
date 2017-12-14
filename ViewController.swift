@@ -146,15 +146,19 @@ class ViewController: QueueViewController<UIImageView>, QueueViewControllerDeleg
     @objc func removeImageFromStack() {
         print("Removing Image From Stack!")
         if self.indexTracking < self.queueControllerSource.count {
-            self.popTransition(newView: self.queueControllerSource[indexTracking], propertyToChange: .bgColor)
+            self.dequeueTransition(newView: self.queueControllerSource[indexTracking], propertyToChange: .bgColor)
             self.indexTracking += 1
         } else {
-            self.popTransition(newView: nil, propertyToChange: nil)
+            self.dequeueTransition(newView: nil, propertyToChange: nil)
         }
     }
     
     func popItem(view: UIView) {
         print("I'm in the delegate and i can see I popped")
+    }
+    
+    func queueLoaded() {
+        print("The queue has been locked and loaded!")
     }
 
     public override func numberOfItemsToShow() -> Int {

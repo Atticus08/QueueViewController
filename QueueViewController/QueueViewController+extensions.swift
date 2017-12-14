@@ -11,8 +11,13 @@ import UIKit
 // MARK: - Queue View Controller Helper Method Extension
 
 extension QueueViewController {
-    /// Pop the first image view off of the queue view controller
-    public func popTransition(newView: T?, propertyToChange: ViewProperty?) {
+    /**
+     Visually dequeue the first image view off of the queue view controller
+     - Parameters:
+        - newView: The new UIView object that will be used to modify the queue's UIView property.
+        - propertyToChange: The property to be modified on the queue's UIView object.
+     */
+    public func dequeueTransition(newView: T?, propertyToChange: ViewProperty?) {
         guard let poppedView = self.viewQueue.dequeue() else { return }
         print("The size of my queue after pop: ", self.viewQueue.size)
         self.delegate?.popItem(view: poppedView.view)

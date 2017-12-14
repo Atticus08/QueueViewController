@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D806D92C1FE3222B007F6048 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D806D92B1FE3222B007F6048 /* Default-568h@2x.png */; };
 		D82BAF7B1FDF7806002773D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82BAF7A1FDF7806002773D0 /* AppDelegate.swift */; };
 		D82BAF821FDF7806002773D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D82BAF811FDF7806002773D0 /* Assets.xcassets */; };
 		D82BAF8F1FDF7887002773D0 /* Queue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D82BAF8C1FDF7887002773D0 /* Queue.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D806D92B1FE3222B007F6048 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		D82BAF771FDF7806002773D0 /* QueueViewController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QueueViewController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D82BAF7A1FDF7806002773D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D82BAF811FDF7806002773D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -84,6 +86,7 @@
 		D82BAF6E1FDF7806002773D0 = {
 			isa = PBXGroup;
 			children = (
+				D806D92B1FE3222B007F6048 /* Default-568h@2x.png */,
 				D82BAF7A1FDF7806002773D0 /* AppDelegate.swift */,
 				D82BAF921FDF78AA002773D0 /* ViewController.swift */,
 				D855A9ED1FE0AF8B0022585F /* LinkedStructures */,
@@ -227,6 +230,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D82BAF821FDF7806002773D0 /* Assets.xcassets in Resources */,
+				D806D92C1FE3222B007F6048 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

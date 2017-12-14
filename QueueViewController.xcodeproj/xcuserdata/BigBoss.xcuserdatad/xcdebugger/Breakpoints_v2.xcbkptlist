@@ -2,4 +2,54 @@
 <Bucket
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "QueueViewController/QueueViewController.swift"
+            timestampString = "534978440.239477"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "QueueViewController.QueueViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "QueueViewController"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/BigBoss/AtticusProjects/QueueViewController/QueueViewController/QueueViewController.swift"
+                  timestampString = "534977123.134237"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "39">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "QueueView.QueueViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "QueueView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/BigBoss/AtticusProjects/QueueViewController/QueueViewController/QueueViewController.swift"
+                  timestampString = "534977123.346566"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "39">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
