@@ -111,6 +111,7 @@ extension QueueViewController {
         for index in 0..<numberOfItemsToShow {
             let queueView = self.setupItem(atIndex: index, view: views[index])
             self.viewQueue.enqueue(queueView)
+            print("Index \(index) is created and has a top constant of: \((queueView.topConstraint?.constant)!)")
         }
     }
     
@@ -135,6 +136,7 @@ extension QueueViewController {
         // We need to do this to animate the objects that have layout constraints.
         view.translatesAutoresizingMaskIntoConstraints = false
         let topConstraintOffset = minimumLineSpacing + (minimumLineSpacing + queueItem.size.height) * CGFloat(index)
+        print("Index \(index) has a top constraint offset of: \(topConstraintOffset)")
         
         // Place views below the queue, off the screen. When the screen first appears, we animate the views being added to the queue.
         queueItem.topConstraint = view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: self.view.frame.height + topConstraintOffset)
