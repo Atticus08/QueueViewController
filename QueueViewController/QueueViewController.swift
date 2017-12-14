@@ -155,9 +155,9 @@ extension QueueViewController {
     private func enqueueTransition(newItem: QueueItem, index: Int) {
         let timeConstant: TimeInterval = 1.0
         newItem.topConstraint?.constant -= self.view.frame.height
-//        UIView.animate(withDuration: (timeConstant * TimeInterval(index)) + timeConstant, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.0, options: .curveEaseOut, animations: {
-//            print("Index \(index) new top constant: \(newItem.topConstraint?.constant)")
-//            self.view.layoutIfNeeded()
-//        })
+        UIView.animate(withDuration: (timeConstant * TimeInterval(index)) + timeConstant, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.0, options: .curveEaseOut, animations: {
+            print("Index \(index) new top constant: \(newItem.topConstraint?.constant)")
+            self.view.layoutIfNeeded()
+        })
     }
 }
