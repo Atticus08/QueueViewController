@@ -136,8 +136,7 @@ extension QueueViewController {
         // We need to do this to animate the objects that have layout constraints.
         view.translatesAutoresizingMaskIntoConstraints = false
         let topConstraintOffset = minimumLineSpacing + (minimumLineSpacing + queueItem.size.height) * CGFloat(index)
-        print("Index \(index) has a top constraint offset of: \(topConstraintOffset)")
-        
+        print("Index \(index) has a top constraint offset of: \(topConstraintOffset), and will be added to view frame height of \(self.view.frame.height)")
         // Place views below the queue, off the screen. When the screen first appears, we animate the views being added to the queue.
         queueItem.topConstraint = view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: self.view.frame.height + topConstraintOffset)
         queueItem.leftConstraint = view.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: minimumEdgeSpacing)
