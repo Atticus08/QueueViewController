@@ -139,7 +139,7 @@ extension QueueViewController {
         print("Index \(index) has a top constraint offset of: \(topConstraintOffset)")
         
         // Place views below the queue, off the screen. When the screen first appears, we animate the views being added to the queue.
-        queueItem.topConstraint = view.topAnchor.constraint(equalTo: self.view.topAnchor, constant: self.view.frame.height + topConstraintOffset)
+        queueItem.topConstraint = view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: self.view.frame.height + topConstraintOffset)
         queueItem.leftConstraint = view.leftAnchor.constraint(equalTo: self.view.leftAnchor, constant: minimumEdgeSpacing)
         queueItem.rightConstraint = view.rightAnchor.constraint(equalTo: self.view.rightAnchor, constant: -minimumEdgeSpacing)
         queueItem.heightConstraint = view.heightAnchor.constraint(equalToConstant: queueItem.size.height)
@@ -154,8 +154,8 @@ extension QueueViewController {
     
     private func enqueueTransition(newItem: QueueItem, index: Int) {
         let timeConstant: TimeInterval = 1.0
+        newItem.topConstraint?.constant -= self.view.frame.height
         UIView.animate(withDuration: (timeConstant * TimeInterval(index)) + timeConstant, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.0, options: .curveEaseOut, animations: {
-            newItem.topConstraint?.constant -= self.view.frame.height
             print("Index \(index) new top constant: \(newItem.topConstraint?.constant)")
             self.view.layoutIfNeeded()
         })
