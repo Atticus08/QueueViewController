@@ -121,7 +121,7 @@ class ViewController: QueueViewController<UIImageView>, QueueViewControllerDeleg
     var queueControllerSource = [UIImageView]()
     
     init() {
-        self.indexTracking = 3
+        self.indexTracking = 5
         self.queueControllerSource = [firstImageView, secondImageView, thirdImageView, fourthImageView,
                                       fifthImageView, sixthImageView, seventhImageView, eigthImageView]
         super.init(nibName: nil, bundle: nil)
@@ -140,7 +140,6 @@ class ViewController: QueueViewController<UIImageView>, QueueViewControllerDeleg
         self.button.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20).isActive = true
         self.button.widthAnchor.constraint(equalToConstant: 150).isActive = true
         self.button.heightAnchor.constraint(equalToConstant: 50).isActive = true
-        
     }
     
     @objc func removeImageFromStack() {
@@ -170,7 +169,7 @@ class ViewController: QueueViewController<UIImageView>, QueueViewControllerDeleg
     }
     
     public override func queueView(sizeForItemAt: Int) -> CGSize {
-        return CGSize(width: 100, height: 75)
+        return CGSize(width: 100, height: 50)
     }
     
     public override func queueView(minimumEdgeSpacingForItems: CGFloat) -> CGFloat {
