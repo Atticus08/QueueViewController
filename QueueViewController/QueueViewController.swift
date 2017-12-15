@@ -46,12 +46,11 @@ open class QueueViewController<T: UIView>: UIViewController {
     
     open override func viewDidLoad() {
         super.viewDidLoad()
-        self.queueView(setUpWithViews: self.queueSources())
-        print("In queue view controller VIEW DID LOAD, my view height is: \(self.view.frame.height)")
     }
     
     open override func viewDidAppear(_ animated: Bool) {
         print("In queue view controller VIEW DID APPEAR, my view height is: \(self.view.frame.height)")
+        self.queueView(setUpWithViews: self.queueSources())
         let numberOfItemsToShow = self.numberOfItemsToShow()
         for index in 0..<numberOfItemsToShow {
             let newItem = self.viewQueue.getNode(index: index)
@@ -148,14 +147,14 @@ extension QueueViewController {
         queueItem.rightConstraint?.isActive = true
         queueItem.heightConstraint?.isActive = true
         queueItem.widthConstraint?.isActive = true
-        
+        self.view.layoutIfNeeded()
         return queueItem
     }
     
     private func enqueueTransition(newItem: QueueItem, index: Int) {
-        let timeConstant: TimeInterval = 1.0
+        let timeConstant: TimeInterval = 0.75
         newItem.topConstraint?.constant -= self.view.frame.height
-        UIView.animate(withDuration: (timeConstant * TimeInterval(index)) + timeConstant, delay: 0.0, usingSpringWithDamping: 1, initialSpringVelocity: 1.0, options: .curveEaseOut, animations: {
+        UIView.animate(withDuration: (timeConstant * TimeInterval(index)) + timeConstant, delay: 0.0, animations: {
             self.view.layoutIfNeeded()
         })
     }
