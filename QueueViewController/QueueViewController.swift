@@ -27,6 +27,9 @@ open class QueueViewController<T: UIView>: UIViewController {
         case image, bgColor, text
     }
     
+    // Adjusts the animation duration during the initial load of the queue.
+    public var queueLoadAnimateTimeConstant: TimeInterval = 0.65
+    
     public weak var delegate: QueueViewControllerDelegate?
     
     // MARK: Internal Class Properties
@@ -152,9 +155,8 @@ extension QueueViewController {
     }
     
     private func enqueueTransition(newItem: QueueItem, index: Int) {
-        let timeConstant: TimeInterval = 0.75
         newItem.topConstraint?.constant -= self.view.frame.height
-        UIView.animate(withDuration: (timeConstant * TimeInterval(index)) + timeConstant, delay: 0.0, animations: {
+        UIView.animate(withDuration: (self.queueLoadAnimateTimeConstant * TimeInterval(index)*0.5) + self.queueLoadAnimateTimeConstant, delay: 0.0, animations: {
             self.view.layoutIfNeeded()
         })
     }
