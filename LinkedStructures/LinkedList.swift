@@ -16,6 +16,10 @@ public final class LinkedNode<T> {
     init(data: T) {
         self.data = data
     }
+    
+    deinit {
+        print("Farewell to Linked Node!")
+    }
 }
 
 public struct LinkedList<T> {
