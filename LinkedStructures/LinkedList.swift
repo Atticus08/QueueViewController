@@ -26,6 +26,7 @@ public struct LinkedList<T> {
     
     private var head: Node?
     private var tail: Node?
+    
     public private(set) var size: Int = 0
     public var first: Node? {
         get { return head }
@@ -39,7 +40,7 @@ public struct LinkedList<T> {
     
     public init () { }
 
-    /*
+    /**
      Append new node to the end of the list
      - Parameter data: Data to be stored in new node
      */
@@ -56,7 +57,7 @@ public struct LinkedList<T> {
         self.size += 1
     }
 
-    /*
+    /**
      Remove node from specified position in list.
      - Parameter node: The node that needs to be removed in the list.
      - Returns: The Node that was removed
@@ -89,7 +90,7 @@ public struct LinkedList<T> {
         return node.data
     }
 
-    /*
+    /**
      Traverse through the linked list to locate the desired node from the specified
      index.
      - Parameter index: The location of the node we want to find in the list.

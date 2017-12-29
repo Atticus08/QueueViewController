@@ -13,7 +13,7 @@ public protocol QueueViewControllerDelegate: class {
     /// Informs the delegate that the queue has been loaded successfully
     func queueLoaded()
     
-    /*
+    /**
      Lets the delegate know that a view has been dequeued, and allows the delegate to
      access that view.
     - Parameter view: The view that was dequeued from the queue
@@ -123,7 +123,7 @@ open class QueueViewController<T: UIView>: UIViewController {
 extension QueueViewController {
     /**
      Set up image view queue within view controller.
-     - Parameter imageViews: The image views to be loaded within queue view controller
+     - Parameter views: The image views to be loaded within queue view controller
      */
     private func queueView(setUpWithViews views: [T]) {
         let numberOfItemsToShow = self.numberOfItemsToShow()
@@ -169,7 +169,7 @@ extension QueueViewController {
         return queueItem
     }
     
-    /*
+    /**
      Animates a "slide-in" motion for the views when the queue loaded on the screen.
      - Parameters:
         - newItem: The new item to be placed into the queue

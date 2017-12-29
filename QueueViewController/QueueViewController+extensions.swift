@@ -2,7 +2,7 @@
 //  QueueViewController+extensions.swift
 //  QueueViewController
 //
-//  Created by Atticus on 12/12/17.
+//  Created by Tom Fritz on 12/12/17.
 //  Copyright © 2017 Tom Fritz. All rights reserved.
 //
 
@@ -12,6 +12,7 @@ import UIKit
 
 extension QueueViewController {
     // TODO: Clean up animation code
+    
     /**
      Visually dequeue the first image view off of the queue view controller
      - Parameters:

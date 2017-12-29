@@ -29,15 +29,15 @@ public struct Queue<T> {
         get { return list.last?.data}
     }
     
-    /*
+    /**
      Append a new object to the end of the queue.
-     - Parameter object: Object being added to queue
+     - Parameter element: Object being added to queue
      */
     public mutating func enqueue(_ element: T) {
         list.append(element)
     }
     
-    /*
+    /**
      Remove object from front of the queue.
      - Returns: Returns the object's data after removal
      */
@@ -48,7 +48,7 @@ public struct Queue<T> {
         return list.remove(element)
     }
     
-    /*
+    /**
     Retrieve an item in the queue from a specified index.
     - Parameter index: The location of the item we want to retrieve in the queue
     - Returns: Return the requested node
