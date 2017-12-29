@@ -1,6 +1,5 @@
 //
 //  LinkedList.swift
-//  GetFritzed
 //
 //  Created by Tom Fritz on 12/11/17.
 //  Copyright © 2017 Tom Fritz. All rights reserved.
@@ -13,10 +12,10 @@ public final class LinkedNode<T> {
     var data: T
     var next: LinkedNode<T>?
     weak var previous: LinkedNode<T>?
+    
     init(data: T) {
         self.data = data
     }
-    
     deinit {
         print("Farewell to Linked Node!")
     }
@@ -40,14 +39,13 @@ public struct LinkedList<T> {
     
     public init () { }
 
-    /**
+    /*
      Append new node to the end of the list
-     - parameters:
-        - data: Data to be stored in new node.
+     - Parameter data: Data to be stored in new node
      */
     public mutating func append(_ data: T) {
         let tmpNode: Node = Node(data: data)
-        // Verify tail isn't null, if it is, then that means we're at the beginning of the list.
+
         if let tail = self.tail {
             tmpNode.previous = tail
             tail.next = tmpNode
@@ -57,14 +55,12 @@ public struct LinkedList<T> {
         self.tail = tmpNode
         self.size += 1
     }
-    
-    /**
+
+    /*
      Remove node from specified position in list.
-     - returns:
-     The Node that was removed.
-     - parameters:
-     - position: The position of the node to remove in the list.
-     */
+     - Parameter node: The node that needs to be removed in the list.
+     - Returns: The Node that was removed
+    */
     public mutating func remove(_ node: Node) -> T? {
         let prev = node.previous
         let next = node.next
@@ -92,8 +88,8 @@ public struct LinkedList<T> {
         self.size -= 1
         return node.data
     }
-    
-    /**
+
+    /*
      Traverse through the linked list to locate the desired node from the specified
      index.
      - Parameter index: The location of the node we want to find in the list.

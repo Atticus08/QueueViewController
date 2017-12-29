@@ -3,7 +3,7 @@
 //  QueueViewController
 //
 //  Created by Atticus on 12/12/17.
-//  Copyright © 2017 Atticus08. All rights reserved.
+//  Copyright © 2017 Tom Fritz. All rights reserved.
 //
 
 import UIKit
@@ -11,6 +11,7 @@ import UIKit
 // MARK: - Queue View Controller Helper Method Extension
 
 extension QueueViewController {
+    // TODO: Clean up animation code
     /**
      Visually dequeue the first image view off of the queue view controller
      - Parameters:
@@ -18,9 +19,7 @@ extension QueueViewController {
         - propertyToChange: The property to be modified on the queue's UIView object.
      */
     public func dequeueTransition(newView: T?, propertyToChange: ViewProperty?) {
-        print("In queue view controller DEQUEUE TRANSITION, my view height is: \(self.view.frame.height)")
         guard let poppedView = self.viewQueue.dequeue() else { return }
-        print("The size of my queue after pop: ", self.viewQueue.size)
         self.delegate?.popItem(view: poppedView.view)
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             self?.movePoppedViewToRight(poppedView: poppedView)
@@ -44,12 +43,14 @@ extension QueueViewController {
     }
     
     // MARK: Animation completion handler functions
+    
     fileprivate func movePoppedViewToRight(poppedView: QueueItem) {
         let viewWidth = self.view.frame.width
         poppedView.rightConstraint?.constant += viewWidth
         poppedView.leftConstraint?.constant += viewWidth
         self.view.layoutIfNeeded()
     }
+    
     fileprivate func repositionQueue(poppedView: QueueItem) {
         let queueSize = self.viewQueue.size
         let lineSpacing = self.queueView(minimumLineSpacingForItems: 0.0)
@@ -58,17 +59,18 @@ extension QueueViewController {
             image.topConstraint?.constant -= lineSpacing + image.size.height
         }
         self.view.layoutIfNeeded()
-        // Move the popped view behind the scenes, and place below the stack.
         poppedView.rightConstraint?.constant -= self.view.frame.width
         poppedView.leftConstraint?.constant -= self.view.frame.width
         poppedView.topConstraint?.constant += self.view.frame.height
     }
+    
     fileprivate func placePoppedViewAtBottom(poppedView: QueueItem) {
         let queueSize = self.viewQueue.size
         let lineSpacing = self.queueView(minimumLineSpacingForItems: 0.0)
         poppedView.topConstraint?.constant -= self.view.frame.height - ((CGFloat(queueSize) * lineSpacing) + (CGFloat(queueSize) * poppedView.size.height))
         self.view.layoutIfNeeded()
     }
+    
     fileprivate func updateNewView(poppedView: QueueItem, newView: T?, property: ViewProperty) {
         guard let newView = newView else { return }
         switch property {

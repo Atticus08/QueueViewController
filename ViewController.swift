@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  QueueViewController
 //
-//  Created by Atticus on 12/11/17.
-//  Copyright © 2017 Atticus08. All rights reserved.
+//  Created by Tom Fritz on 12/11/17.
+//  Copyright © 2017 Tom Fritz. All rights reserved.
 //
 
 import UIKit
@@ -143,7 +143,6 @@ class ViewController: QueueViewController<UIImageView>, QueueViewControllerDeleg
     }
     
     @objc func removeImageFromStack() {
-        print("Removing Image From Stack!")
         if self.indexTracking < self.queueControllerSource.count {
             self.dequeueTransition(newView: self.queueControllerSource[indexTracking], propertyToChange: .bgColor)
             self.indexTracking += 1
@@ -153,7 +152,7 @@ class ViewController: QueueViewController<UIImageView>, QueueViewControllerDeleg
     }
     
     func popItem(view: UIView) {
-        print("I'm in the delegate and i can see I popped")
+        print("I'm in the delegate and I can see that the view was removed from the queue!")
     }
     
     func queueLoaded() {
